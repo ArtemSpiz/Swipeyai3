@@ -287,7 +287,6 @@ function Hero() {
 															handleAnswerLeave()
 															scrollToStep(index + 1)
 														}
-														// Якщо останній крок — даємо перехід по href (на /signup)
 													}}
 												>
 													<answer.icon className={'heroIconAnswer'} />
