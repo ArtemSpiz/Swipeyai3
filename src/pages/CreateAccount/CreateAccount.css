@@ -380,10 +380,14 @@
 	.signUpContent {
 		gap: 20px;
 	}
-
 	.blondGirl,
 	.brownGirl {
 		height: 259px;
+		width: 259px;
+	}
+
+	.blondGirl {
+		width: 200px;
 	}
 
 	.signUpOr {
