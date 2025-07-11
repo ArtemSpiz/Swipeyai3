@@ -438,7 +438,7 @@
 		width: 150px;
 		padding: 13.313px 6.656px;
 		gap: 12.48px;
-		height: -webkit-fill-available;
+		height: 90px;
 		justify-content: center;
 	}
 }
