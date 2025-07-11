@@ -373,6 +373,13 @@
 }
 
 @media (max-width: 640px) {
+	.heroDots {
+		top: 84px;
+	}
+
+	.heroSection {
+		padding-bottom: 128px;
+	}
 	.heroIconAnswer {
 		height: 17px;
 		width: 17px;
@@ -431,5 +438,7 @@
 		width: 150px;
 		padding: 13.313px 6.656px;
 		gap: 12.48px;
+		height: -webkit-fill-available;
+		justify-content: center;
 	}
 }
