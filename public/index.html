@@ -11,6 +11,7 @@
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
 		<link
 			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
 			rel="stylesheet"
@@ -23,5 +24,280 @@
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<div id="root"></div>
+		<script src="https://rtrk.swipey.club/uniclick.js?attribution=lastpaid&cookiedomain=www.swipeygirlfriend.com&cookieduration=90&defaultcampaignid=684adf7cefc4b9165d7039b0&regviewonce=false"></script>
+
+		<script>
+			console.log('🚀 UTM Tracker Script Starting...')
+			console.log('📍 Current URL:', window.location.href)
+			console.log('🔗 URL Search Params:', window.location.search)
+
+			function getUrlParams() {
+				console.log('🔍 Extracting URL parameters...')
+				const params = new URLSearchParams(window.location.search)
+				const result = {}
+
+				for (const [key, value] of params.entries()) {
+					result[key] = value
+					console.log(`  ✓ Found param: ${key} = ${value}`)
+				}
+
+				console.log('📦 All URL params:', result)
+				return result
+			}
+
+			// Function to test localStorage availability
+			function testLocalStorage() {
+				try {
+					const testKey = '__utm_test__'
+					localStorage.setItem(testKey, 'test')
+					const testValue = localStorage.getItem(testKey)
+					localStorage.removeItem(testKey)
+					console.log('✅ localStorage is working')
+					return true
+				} catch (error) {
+					console.error('❌ localStorage test failed:', error)
+					return false
+				}
+			}
+
+			// Function to save UTM and tracking parameters
+			function saveTrackingParams(params) {
+				console.log('💾 Starting to save tracking parameters...')
+
+				// Test localStorage first
+				if (!testLocalStorage()) {
+					console.error('❌ Cannot save - localStorage not available')
+					return false
+				}
+
+				// Define which parameters to track and save
+				const trackingKeys = [
+					'utm_source',
+					'utm_medium',
+					'utm_campaign',
+					'utm_term',
+					'utm_content',
+					'pubid',
+					'ref_id',
+					'sub4',
+					'sub18',
+					'sub19',
+					'gclid', // Google Click ID
+					'fbclid', // Facebook Click ID
+					'msclkid', // Microsoft Click ID
+				]
+
+				console.log('🎯 Looking for these tracking parameters:', trackingKeys)
+
+				const trackingParams = {}
+				let hasTrackingParams = false
+
+				// Extract only tracking parameters
+				trackingKeys.forEach(key => {
+					if (params[key]) {
+						trackingParams[key] = params[key]
+						hasTrackingParams = true
+						console.log(`  ✅ Tracking param found: ${key} = ${params[key]}`)
+					}
+				})
+
+				console.log('📊 Final tracking params to save:', trackingParams)
+				console.log('🤔 Has tracking params?', hasTrackingParams)
+
+				if (hasTrackingParams) {
+					try {
+						// Save to localStorage (persists across browser sessions)
+						localStorage.setItem(
+							'trackingParams',
+							JSON.stringify(trackingParams)
+						)
+						console.log('✅ Saved to localStorage')
+
+						// Save to sessionStorage (persists for current session)
+						sessionStorage.setItem(
+							'trackingParams',
+							JSON.stringify(trackingParams)
+						)
+						console.log('✅ Saved to sessionStorage')
+
+						// Save with timestamp for analytics
+						const trackingData = {
+							params: trackingParams,
+							timestamp: new Date().toISOString(),
+							page: window.location.pathname,
+							referrer: document.referrer,
+						}
+
+						localStorage.setItem('trackingData', JSON.stringify(trackingData))
+						console.log('✅ Saved tracking data with metadata:', trackingData)
+
+						// Verify it was saved correctly
+						const verification = localStorage.getItem('trackingParams')
+						console.log(
+							'🔍 Verification - what was actually saved:',
+							JSON.parse(verification)
+						)
+
+						return true
+					} catch (error) {
+						console.error('❌ Error saving tracking params:', error)
+						return false
+					}
+				} else {
+					console.log(
+						'⚠️ No tracking parameters found in URL - nothing to save'
+					)
+					console.log(
+						'💡 URL should contain params like ?utm_source=google&utm_campaign=test&pubid=123'
+					)
+					return false
+				}
+			}
+
+			// Function to get saved tracking parameters
+			function getSavedTrackingParams() {
+				console.log('📖 Loading saved tracking parameters...')
+				try {
+					const saved = localStorage.getItem('trackingParams')
+					if (saved) {
+						const parsed = JSON.parse(saved)
+						console.log('✅ Found saved tracking params:', parsed)
+						return parsed
+					} else {
+						console.log('⚠️ No saved tracking params found')
+						return {}
+					}
+				} catch (error) {
+					console.error('❌ Error loading saved tracking params:', error)
+					return {}
+				}
+			}
+
+			// Function to update all buttons and links on the page
+			function updateButtons(params) {
+				console.log('🔄 Updating buttons and links...')
+
+				const buttons = document.querySelectorAll('a, button')
+				console.log(`🔍 Found ${buttons.length} buttons/links to check`)
+
+				if (!buttons.length) {
+					console.log('⚠️ No buttons or links found on page')
+					return
+				}
+
+				// Merge current params with saved params (current params take priority)
+				const savedParams = getSavedTrackingParams()
+				const allParams = { ...savedParams, ...params }
+				console.log('🔄 Merged params (saved + current):', allParams)
+
+				const paramString = Object.keys(allParams)
+					.map(key => `${key}=${encodeURIComponent(allParams[key])}`)
+					.join('&')
+
+				console.log('🔗 Parameter string to append:', paramString)
+
+				if (paramString) {
+					let updatedCount = 0
+					buttons.forEach((button, index) => {
+						if (button.tagName === 'A' && button.href) {
+							const originalHref = button.href
+							try {
+								const url = new URL(button.href)
+								// Only add params to internal links or if href is relative
+								if (
+									url.hostname === window.location.hostname ||
+									button.href.startsWith('/') ||
+									button.href.startsWith('./')
+								) {
+									url.search = paramString
+									button.href = url.toString()
+									updatedCount++
+									console.log(`  ✅ Updated link ${index + 1}:`)
+									console.log(`    Before: ${originalHref}`)
+									console.log(`    After:  ${button.href}`)
+								} else {
+									console.log(
+										`  ⏭️ Skipped external link ${index + 1}: ${originalHref}`
+									)
+								}
+							} catch (error) {
+								console.error(`  ❌ Error updating link ${index + 1}:`, error)
+							}
+						}
+					})
+					console.log(`✅ Updated ${updatedCount} internal links`)
+				} else {
+					console.log('⚠️ No parameters to append - paramString is empty')
+				}
+			}
+
+			// Function to clear saved tracking data (useful for testing)
+			function clearTrackingData() {
+				console.log('🗑️ Clearing all tracking data...')
+				localStorage.removeItem('trackingParams')
+				localStorage.removeItem('trackingData')
+				sessionStorage.removeItem('trackingParams')
+				console.log('✅ Tracking data cleared')
+			}
+
+			// Function to show current status
+			function showTrackingStatus() {
+				console.log('\n📊 === TRACKING STATUS REPORT ===')
+				console.log('🌐 Current URL:', window.location.href)
+				console.log('🔗 URL Parameters:', window.location.search)
+				console.log('💾 Saved Params:', getSavedTrackingParams())
+				console.log(
+					'📅 Saved Data:',
+					JSON.parse(localStorage.getItem('trackingData') || '{}')
+				)
+				console.log('=================================\n')
+			}
+
+			// Main execution when DOM is ready
+			document.addEventListener('DOMContentLoaded', () => {
+				console.log('\n🎬 DOM Content Loaded - Starting UTM capture process...')
+
+				try {
+					// Step 1: Get URL parameters
+					const params = getUrlParams()
+
+					// Step 2: Save tracking parameters
+					const saveSuccess = saveTrackingParams(params)
+
+					// Step 3: Update buttons with parameters
+					updateButtons(params)
+
+					// Step 4: Set up observer for dynamic content
+					const observer = new MutationObserver(() => {
+						console.log('🔄 DOM changed - re-updating buttons...')
+						updateButtons(params)
+					})
+
+					observer.observe(document.body, {
+						childList: true,
+						subtree: true,
+					})
+
+					console.log('✅ UTM tracking setup complete')
+
+					// Show final status
+					setTimeout(showTrackingStatus, 500)
+				} catch (error) {
+					console.error('❌ Error in main UTM tracking setup:', error)
+				}
+			})
+
+			// Make functions available globally for debugging
+			window.getSavedTrackingParams = getSavedTrackingParams
+			window.clearTrackingData = clearTrackingData
+			window.showTrackingStatus = showTrackingStatus
+			window.testLocalStorage = testLocalStorage
+
+			console.log('🛠️ Debug functions available in console:')
+			console.log('  - getSavedTrackingParams()')
+			console.log('  - clearTrackingData()')
+			console.log('  - showTrackingStatus()')
+			console.log('  - testLocalStorage()')
+		</script>
 	</body>
 </html>

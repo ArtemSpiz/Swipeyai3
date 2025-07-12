@@ -4,9 +4,7 @@ import brownGirl from '../../assets/images/brownGirl.png'
 import coin from '../../assets/images/coin.png'
 
 import Google from '../../assets/images/google.png'
-import Discord from '../../assets/images/discord.png'
-import Twitter from '../../assets/images/x.png'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Eye from '../../assets/svg/Eye'
 import Arrow from '../../assets/svg/Arrow'
 
@@ -14,14 +12,6 @@ const socialContent = [
 	{
 		icon: Google,
 		title: 'Google',
-	},
-	{
-		icon: Discord,
-		title: 'Discord',
-	},
-	{
-		icon: Twitter,
-		title: 'Twitter',
 	},
 ]
 
@@ -32,10 +22,37 @@ function CreateAccount() {
 	const [isVisible, setIsVisible] = useState(false)
 	const [emailError, setEmailError] = useState(false)
 	const [passwordError, setPasswordError] = useState(false)
+	const googleBtnRef = useRef(null)
+
+	const CONFIG = {
+		GOOGLE_AUTH_URL: 'https://swipey.ai/api/v1/auth/google/login',
+	}
 
 	const validateEmail = email => {
 		return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 	}
+
+	useEffect(() => {
+		const rtkClickID = document.cookie.match(/rtkclickid-store=([^;]+)/)?.[1]
+		const params = new URLSearchParams(window.location.search)
+
+		const utmObj = {
+			rtkcid: rtkClickID,
+			click_id: rtkClickID,
+			cmpid: rtkClickID,
+			pubid: params.get('pubid'),
+			prelandername: params.get('prelandername'),
+			utm_source: params.get('utm_source'),
+			utm_medium: params.get('utm_medium'),
+			utm_campaign: params.get('utm_campaign'),
+		}
+
+		if (googleBtnRef.current) {
+			googleBtnRef.current.href = `${
+				CONFIG.GOOGLE_AUTH_URL
+			}?state=${encodeURIComponent(JSON.stringify(utmObj))}`
+		}
+	}, [])
 
 	const handleSubmit = () => {
 		const isEmailValid = validateEmail(email)
@@ -123,12 +140,17 @@ function CreateAccount() {
 				<div className='signUpForm'>
 					<div className='signUpSoc'>
 						{socialContent.map((soc, index) => (
-							<div className='socialContent' key={index}>
+							<a
+								ref={googleBtnRef}
+								href='#'
+								className='socialContent'
+								key={index}
+							>
 								<div className='signUpSocIcon'>
 									<img src={soc.icon} alt='socIcon' />
 								</div>
 								<div className='signUpSocTitle'>{soc.title}</div>
-							</div>
+							</a>
 						))}
 					</div>
 

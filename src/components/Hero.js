@@ -39,25 +39,6 @@ function Hero() {
 	const [hoveredIndex, setHoveredIndex] = useState(null)
 	const [isMobile, setIsMobile] = useState(false)
 	const sectionsRef = useRef([])
-	const bgRef = useRef(null)
-
-	const backgroundSlides = isMobile
-		? [firstBg, secondBg, thirdBg, fourthBgMob]
-		: [firstBg, secondBg, thirdBg, fourthBg]
-
-	const stepToBgIndex = isMobile
-		? {
-				0: 0,
-				1: 1,
-				2: 2,
-				3: 3,
-		  }
-		: {
-				0: 0,
-				1: 1,
-				2: 2,
-				3: 3,
-		  }
 
 	const isHeaderVisible = currentStep === 0
 
@@ -83,12 +64,6 @@ function Hero() {
 			setTimeout(() => {
 				currentSection.style.display = 'none'
 			}, 300)
-		}
-
-		if (bgRef.current) {
-			bgRef.current.style.transform = `translateY(-${step * 100}vh)`
-			bgRef.current.style.transition =
-				'transform 0.8s cubic-bezier(0.77,0,0.18,1)'
 		}
 
 		setTimeout(() => {
@@ -192,29 +167,29 @@ function Hero() {
 			</div>
 
 			<div
-				ref={bgRef}
 				className='heroBackgroundContainer'
 				style={{
-					transform: `translateY(-${stepToBgIndex[currentStep] * 100}vh)`,
-					transition: 'transform 0.8s cubic-bezier(0.77,0,0.18,1)',
 					position: 'absolute',
 					top: 0,
 					left: 0,
 					width: '100%',
-					height: `${backgroundSlides.length * 100}vh`,
 					zIndex: -1,
 					overflow: 'hidden',
 				}}
 			>
-				{backgroundSlides.map((bg, i) => (
-					<div
-						key={i}
-						className='heroSectionBg'
-						style={{ height: '100vh', width: '100%' }}
-					>
-						<img src={bg} alt={`bg-${i}`} />
-					</div>
-				))}
+				<video
+					className='heroSectionBg'
+					autoPlay
+					muted
+					loop
+					playsInline
+					style={{ height: '100vh', width: '100%', objectFit: 'cover' }}
+				>
+					<source
+						src='https://d12kahz818c96x.cloudfront.net/prelander/MontageReelTiktok.webm'
+						type='video/webm'
+					/>
+				</video>
 			</div>
 
 			<div className='heroContent'>

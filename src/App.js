@@ -1,4 +1,4 @@
-import CreateAccount from './pages/CreateAccount/CreateAccount'
+import CreateAccount from './pages/CreateAcount/CreateAccount'
 import Home from './pages/Home/Home'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
