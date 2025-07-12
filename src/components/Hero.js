@@ -166,25 +166,17 @@ function Hero() {
 				))}
 			</div>
 
-			<div
-				className='heroBackgroundContainer'
-				style={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					width: '100%',
-					zIndex: -1,
-					overflow: 'hidden',
-				}}
-			>
-				<video
-					className='heroSectionBg'
-					autoPlay
-					muted
-					loop
-					playsInline
-					style={{ height: '100vh', width: '100%', objectFit: 'cover' }}
-				>
+			<div className='heroBackgroundContainer'>
+				<video className='heroSectionBg' autoPlay muted loop playsInline>
+					<source
+						src='https://d12kahz818c96x.cloudfront.net/prelander/MontageReelTiktok.webm'
+						type='video/webm'
+					/>
+				</video>
+			</div>
+
+			<div className='heroBackgroundContainer2'>
+				<video className='heroSectionBg2' autoPlay muted loop playsInline>
 					<source
 						src='https://d12kahz818c96x.cloudfront.net/prelander/MontageReelTiktok.webm'
 						type='video/webm'
