@@ -31,7 +31,6 @@ import thirdIcon2 from '../assets/svg/thirdIcon2'
 import thirdIcon3 from '../assets/svg/thirdIcon3'
 
 import Pencil from '../assets/svg/pencil'
-import fourthBgMob from '../assets/images/fourthBgMob.png'
 
 function Hero() {
 	const [currentStep, setCurrentStep] = useState(0)
@@ -198,12 +197,23 @@ function Hero() {
 							)}
 
 							<div className='sectionContent'>
-								<div className='sectionTexts'>
+								<div
+									className={`sectionTexts  ${
+										index === 0 ? 'firstSectionTexts' : ''
+									}`}
+								>
 									<div
 										className={`sectionTitle  ${
 											index === 0 ? 'firstSectionTitle' : ''
 										}`}
 									>
+										<span
+											className={`shadow-text  ${
+												index === 0 ? 'firstShadow-text' : ''
+											}`}
+										>
+											{content.title}
+										</span>
 										{content.title}
 									</div>
 									<div
