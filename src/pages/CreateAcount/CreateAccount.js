@@ -6,6 +6,7 @@ import Eye from '../../assets/svg/Eye'
 import Arrow from '../../assets/svg/Arrow'
 import ChatIcon from '../../assets/svg/chatIcon'
 import CloseCrosse from '../../assets/svg/closseCross'
+import Coin from '../../assets/images/coin.png'
 
 function CreateAccount() {
 	const [email, setEmail] = useState('')
@@ -16,6 +17,12 @@ function CreateAccount() {
 	const [passwordError, setPasswordError] = useState(false)
 	const googleBtnRef = useRef(null)
 	const [openForm, setOpenForm] = useState(false)
+
+	const [randomNum, setRandomNum] = useState(10000)
+
+	useEffect(() => {
+		setRandomNum(Math.floor(Math.random() * (50000 - 10000 + 1)) + 10000)
+	}, [])
 
 	const CONFIG = {
 		GOOGLE_AUTH_URL: 'https://swipey.ai/api/v1/auth/google/login',
@@ -115,12 +122,6 @@ function CreateAccount() {
 				/>
 			</video>
 			<div className='signUpContent'>
-				<video className='signUpSectionBg2' autoPlay muted loop playsInline>
-					<source
-						src='https://d12kahz818c96x.cloudfront.net/prelander/MontageReelTiktok.webm'
-						type='video/webm'
-					/>
-				</video>
 				<div className='signUpTexts'>
 					<div className='signUpTitles'>
 						<div className='signUpUnderTitle'>
@@ -169,6 +170,16 @@ function CreateAccount() {
 							<div className='signUpManualForm'>
 								<div className='closeCrosse'>
 									<CloseCrosse onClick={() => setOpenForm(false)} />
+								</div>
+
+								<div className='signUpManualFormTitles'>
+									<div className='signUpManualFormTitle'>
+										Jump into private chats & voice calls with the hottest
+										models<span> only on Swipey</span>
+									</div>
+									<div className='signUpManualFormSubtitle'>
+										👇<span>{randomNum} members</span> joined today 👇
+									</div>
 								</div>
 
 								<div className='signUpInputs'>
