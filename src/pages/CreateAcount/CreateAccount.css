@@ -7,142 +7,166 @@
 	align-items: center;
 	justify-content: center;
 	gap: 72px;
-
-	background-image: url('../../assets/images/signUpBg.png');
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
 	justify-content: center;
 }
 
-.blondGirl {
+.signUpSectionBg1 {
 	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: auto;
-	height: 90vh;
-	z-index: 0;
-}
-
-.brownGirl {
-	position: absolute;
+	z-index: -3;
 	right: 0;
-	bottom: 0;
-	width: auto;
-	height: 90vh;
-	z-index: 0;
-}
-
-.signUpTitle {
-	color: #fff;
-	text-align: center;
-	font-family: Poppins;
-	font-size: 32px;
-	font-style: normal;
-	font-weight: 600;
-	line-height: 120%; /* 38.4px */
-	text-transform: capitalize;
-	z-index: 4;
-}
-
-.signUpTitle2 {
-	background: linear-gradient(91deg, #9e53ba 34.63%, #f36088 73.54%);
-	background-clip: text;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	width: 100%;
 }
 
 .signUpContent {
-	display: inline-flex;
+	width: 506px;
+	height: 90%;
+	flex-shrink: 0;
+	position: relative;
+	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 	gap: 24px;
-	z-index: 4;
-	align-items: center;
-	justify-content: center;
+	border-radius: 32px;
+	overflow: hidden;
+}
+
+.signUpContent::before {
+	content: '';
+	background: rgba(5, 16, 46, 0.48);
+	backdrop-filter: blur(12px);
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+
+	z-index: -1;
+}
+
+.signUpSectionBg2 {
+	position: absolute;
+	z-index: -2;
+	top: 0;
+	right: 0;
+	width: auto;
+	height: 100%;
 }
 
 .signUpTexts {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 6px;
+	gap: 20px;
+	align-self: stretch;
 }
 
-.signUpContentTitle {
-	color: #fff;
+.signUpTitles {
+	display: flex;
+	width: 343px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+}
+
+.signUpUnderTitle {
+	display: flex;
+	height: 16px;
+	padding: 4px 8px;
+	justify-content: center;
+	align-items: center;
+	gap: 2px;
+	border-radius: 4px;
+	background: var(
+		--Gradient_Hot,
+		linear-gradient(100deg, #ed712b 0%, #d03c3c 83.99%)
+	);
+
+	/* Hot_Glow */
+	box-shadow: 0px 0px 17px 0px rgba(214, 94, 38, 0.54),
+		0px 0px 2.763px 0px rgba(214, 94, 38, 0.27);
+
+	color: var(--White_Main-Contrast, #fff);
 	text-align: center;
+
+	/* Body/Footnote/10 Semi */
 	font-family: Poppins;
-	font-size: 28px;
+	font-size: 10px;
 	font-style: normal;
 	font-weight: 600;
-	line-height: 120%; /* 33.6px */
-	text-transform: capitalize;
+	line-height: 120%; /* 12px */
+}
+
+.signUpTitle {
+	color: var(--White_Main-Contrast, #fff);
+	text-align: center;
+	font-family: Anton;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 40px; /* 125% */
+	text-transform: uppercase;
+}
+
+.signUpSubtitles {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	align-self: stretch;
 }
 
 .signUpSubtitle {
-	display: flex;
-	gap: 4px;
-	align-items: center;
-	color: #fff;
-	font-family: Poppins;
-	font-size: 16px;
-	font-style: normal;
-	font-weight: 600;
-	line-height: 120%; /* 19.2px */
-	text-transform: capitalize;
-}
+	color: var(--Text_Secondary, #d9d1dc);
 
-.coin {
-	width: 20px;
-	height: 20px;
+	/* Body/S/14 Med */
+	font-family: Poppins;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 130%; /* 18.2px */
+	letter-spacing: -0.14px;
 }
 
 .signUpForm {
 	display: flex;
+	width: 343px;
 	flex-direction: column;
-	gap: 18px;
-	align-self: stretch;
-	align-items: center;
-}
-
-.signUpSoc {
-	display: flex;
 	align-items: center;
 	gap: 8px;
-	align-self: stretch;
-	justify-content: center;
 }
 
-.socialContent {
-	cursor: pointer;
+.signUpGoggle {
 	display: flex;
-	padding: 16px 32px;
-	flex-direction: column;
+	padding: 16px 40px;
 	justify-content: center;
 	align-items: center;
 	gap: 8px;
+	align-self: stretch;
+	border-radius: 16px;
+	background: var(
+		--Primary,
+		linear-gradient(103deg, #de8424 -11.46%, #fc6590 39.64%, #8049f3 103.2%)
+	);
 
-	border-radius: 8px;
-	border: 1px solid #463046;
-	background: #322636;
-	width: 80%;
-}
+	/* Primary_Glow */
+	box-shadow: 0px 10px 33px 0px rgba(174, 22, 183, 0.49),
+		0px 2px 5.363px 0px rgba(174, 22, 183, 0.25);
 
-.signUpSocIcon {
-	width: 20px;
-	height: 20px;
-}
-
-.signUpSocTitle {
 	color: #fff;
+
+	/* Body/S/14 Med */
 	font-family: Poppins;
-	font-size: 12px;
+	font-size: 14px;
 	font-style: normal;
-	font-weight: 400;
-	line-height: 120%; /* 14.4px */
+	font-weight: 500;
+	line-height: 130%; /* 18.2px */
+	letter-spacing: -0.14px;
 }
 
 .signUpOr {
+	justify-content: center;
 	color: #fff;
 	font-family: Poppins;
 	font-size: 10px;
@@ -152,15 +176,69 @@
 	display: flex;
 	gap: 12px;
 	align-items: center;
+	width: 100%;
 }
 
 .signUpOr span {
 	height: 1px;
 	background: #463046;
-	width: 150px;
+	width: 100%;
+	max-width: 150px;
+}
+
+.signUpManual {
+	color: var(--White_Main-Contrast, #fff);
+
+	/* Body/XS/12 Med */
+	font-family: Poppins;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 140%; /* 16.8px */
+	display: flex;
+	gap: 2px;
+	align-items: center;
+	cursor: pointer;
+}
+
+.popupOverlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(4px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	border-radius: 32px;
+}
+
+.signUpManualForm {
+	background: #150b1a;
+	border-radius: 24px;
+	padding: 32px 24px;
+	box-shadow: 0 0 24px rgba(255, 255, 255, 0.1);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+	z-index: 1001;
+	max-width: 400px;
+}
+
+.closeCrosse {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
 }
 
 .signUpInputs {
+	position: relative;
+	z-index: 4;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -222,6 +300,8 @@
 }
 
 .signUpBtn {
+	position: relative;
+	z-index: 4;
 	border-radius: 18px;
 	background: linear-gradient(
 		91deg,
@@ -250,158 +330,32 @@
 	cursor: pointer;
 }
 
-.signUpTerm {
-	color: #e0dff5;
-	font-family: Poppins;
-	font-size: 10px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 120%; /* 12px */
-}
-
-.signUpTerm span {
-	color: #d7558d;
-}
-
-.signUpFooter {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-
-	color: #8b8f9c;
-	font-family: Poppins;
-	font-size: 10px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 120%; /* 12px */
-}
-
-.signUpLogIn {
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	gap: 2px;
-	color: #e0dff5;
-	font-family: Poppins;
-	font-size: 10px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 120%; /* 12px */
-}
-
-.input-error {
-	border: 1px solid red;
-}
-
-@media (max-width: 1285px) {
-	.brownGirl,
-	.blondGirl {
-		height: 50vw;
-	}
-
-	.signUpTitle {
-		font-size: 30px;
-	}
-}
-
-@media (max-width: 1040px) {
-	.signUpTitle {
-		font-size: 28px;
-	}
-
-	.CreateAccount {
-		gap: 50px;
-	}
-
-	.signUpContentTitle {
-		font-size: 26px;
-	}
-}
-
-@media (max-width: 768px) {
-	.signUpTitle {
-		font-size: 26px;
-	}
-
-	.CreateAccount {
-		gap: 50px;
-		justify-content: start;
-		padding-top: 40px;
-	}
-
-	.signUpContentTitle {
-		font-size: 24px;
-	}
-}
-
 @media (max-width: 640px) {
-	.signUpContentTitle {
-		font-size: 22px;
+	.signUpContent {
+		width: 100%;
+		height: 100%;
+		border-radius: 0;
 	}
 
-	.signUpTitle {
-		display: flex;
-		flex-direction: column;
+	.popupOverlay {
+		border-radius: 0;
 	}
 
-	.signUpSubtitle {
-		font-size: 14px;
-	}
-	.socialContent {
-		padding: 16px;
+	.signUpManualForm {
+		width: 80%;
 	}
 
 	.createPasswordWrapper,
 	.signUpInputEmail {
 		width: -webkit-fill-available;
-		max-width: 338px;
 	}
 
-	.signUpInputs {
-		align-items: center;
+	.signUpSectionBg1 {
+		display: none;
 	}
 
-	.createPassword {
-		width: -webkit-fill-available;
-	}
-
-	.signUpContent {
+	.signUpSectionBg2 {
 		width: 100%;
-	}
-
-	.CreateAccount {
-		padding-inline: 16px;
-		width: auto;
-		background: linear-gradient(180deg, #17121c 0%, rgba(56, 32, 50, 0) 70.82%),
-			linear-gradient(143deg, #4e283c 37.31%, #271a2b 112.95%), #c4c4c4;
-		gap: 20px;
-		overflow: hidden;
-	}
-
-	.signUpContent {
-		gap: 20px;
-	}
-	.blondGirl,
-	.brownGirl {
-		height: 259px;
-		width: 259px;
-	}
-
-	.blondGirl {
-		width: 200px;
-	}
-
-	.signUpOr {
-		width: 100%;
-		justify-content: center;
-	}
-	.signUpOr span {
-		width: 100%;
-		max-width: 150px;
-	}
-
-	.signUpBtn {
-		width: 100%;
-		max-width: 322px;
+		object-fit: cover;
 	}
 }

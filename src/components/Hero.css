@@ -67,6 +67,8 @@
 }
 
 .heroContent {
+	max-width: 500px;
+	text-align: center;
 	position: relative;
 	z-index: 2;
 	display: flex;
@@ -273,6 +275,11 @@
 	align-items: center;
 	width: 100%;
 	height: 100vh;
+}
+
+.textShadow {
+	text-shadow: 0 0 6px #ff69b4, 0 0 12px #ff69b4, 0 0 18px #8a2be2,
+		0 0 24px #8a2be2;
 }
 
 @media (max-width: 1285px) {

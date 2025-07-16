@@ -200,14 +200,14 @@ function Hero() {
 							<div className='sectionContent'>
 								<div className='sectionTexts'>
 									<div
-										className={`sectionTitle ${
+										className={`sectionTitle  ${
 											index === 0 ? 'firstSectionTitle' : ''
 										}`}
 									>
 										{content.title}
 									</div>
 									<div
-										className={`sectionSubtitle ${
+										className={`sectionSubtitle  ${
 											index === 0 ? 'firstSectionSubtitle' : ''
 										}`}
 									>

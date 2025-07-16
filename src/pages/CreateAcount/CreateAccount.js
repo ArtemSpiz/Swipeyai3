@@ -1,19 +1,11 @@
 import './CreateAccount.css'
-import blondGirl from '../../assets/images/blondGirl.png'
-import brownGirl from '../../assets/images/brownGirl.png'
-import coin from '../../assets/images/coin.png'
 
-import Google from '../../assets/images/google.png'
+import Google from '../../assets/svg/google'
 import { useState, useEffect, useRef } from 'react'
 import Eye from '../../assets/svg/Eye'
 import Arrow from '../../assets/svg/Arrow'
-
-const socialContent = [
-	{
-		icon: Google,
-		title: 'Google',
-	},
-]
+import ChatIcon from '../../assets/svg/chatIcon'
+import CloseCrosse from '../../assets/svg/closseCross'
 
 function CreateAccount() {
 	const [email, setEmail] = useState('')
@@ -23,6 +15,7 @@ function CreateAccount() {
 	const [emailError, setEmailError] = useState(false)
 	const [passwordError, setPasswordError] = useState(false)
 	const googleBtnRef = useRef(null)
+	const [openForm, setOpenForm] = useState(false)
 
 	const CONFIG = {
 		GOOGLE_AUTH_URL: 'https://swipey.ai/api/v1/auth/google/login',
@@ -103,9 +96,7 @@ function CreateAccount() {
 			const data = await response.json()
 
 			if (data.success && data.loginUrl) {
-				const redirectUrl = new URL(data.loginUrl)
-
-				window.location.href = redirectUrl.toString()
+				window.location.href = 'https://swipey.ai/explorer?tab=spicy'
 			} else {
 				alert(data.message || 'Something went wrong.')
 			}
@@ -114,45 +105,50 @@ function CreateAccount() {
 			alert('Failed to create account.')
 		}
 	}
+
 	return (
 		<div className='CreateAccount'>
-			<div className='blondGirl'>
-				<img src={blondGirl} alt='blondGirl' />
-			</div>
-			<div className='brownGirl'>
-				<img src={brownGirl} alt='brownGirl' />
-			</div>
-
-			<div className='signUpTitle'>
-				Before we drop you in,
-				<span className='signUpTitle2'> save your preferences</span>
-			</div>
-
+			<video className='signUpSectionBg1' autoPlay muted loop playsInline>
+				<source
+					src='https://d12kahz818c96x.cloudfront.net/prelander/MontageReelTiktok.webm'
+					type='video/webm'
+				/>
+			</video>
 			<div className='signUpContent'>
+				<video className='signUpSectionBg2' autoPlay muted loop playsInline>
+					<source
+						src='https://d12kahz818c96x.cloudfront.net/prelander/MontageReelTiktok.webm'
+						type='video/webm'
+					/>
+				</video>
 				<div className='signUpTexts'>
-					<div className='signUpContentTitle'>Create your account</div>
-					<div className='signUpSubtitle'>
-						& Get 20 <img src={coin} alt='coin' className='coin' /> FREE To
-						Unlock Spicy Videos
+					<div className='signUpTitles'>
+						<div className='signUpUnderTitle'>
+							<ChatIcon className='chatIcon' /> GET 20 FREE MESSAGES
+						</div>
+
+						<div className='signUpTitle'>
+							Unlimited Fun with AI Fantasy Girls
+						</div>
+					</div>
+
+					<div className='signUpSubtitles'>
+						<div className='signUpSubtitle'>
+							💬 No filters. Just raw, spicy chat.
+						</div>
+						<div className='signUpSubtitle'>
+							🔥 Custom AI girls made to match your desires.
+						</div>
+						<div className='signUpSubtitle'>
+							🎁 Unlock exclusive content & daily rewards.
+						</div>
 					</div>
 				</div>
 
 				<div className='signUpForm'>
-					<div className='signUpSoc'>
-						{socialContent.map((soc, index) => (
-							<a
-								ref={googleBtnRef}
-								href='#'
-								className='socialContent'
-								key={index}
-							>
-								<div className='signUpSocIcon'>
-									<img src={soc.icon} alt='socIcon' />
-								</div>
-								<div className='signUpSocTitle'>{soc.title}</div>
-							</a>
-						))}
-					</div>
+					<a href='#' ref={googleBtnRef} className='signUpGoggle'>
+						<Google /> Join FREE With Google
+					</a>
 
 					<div className='signUpOr'>
 						<span />
@@ -160,61 +156,65 @@ function CreateAccount() {
 						<span />
 					</div>
 
-					<div className='signUpInputs'>
-						<input
-							className={`signUpInputEmail ${emailError ? 'input-error' : ''}`}
-							type='email'
-							placeholder='Email'
-							value={email}
-							onChange={e => {
-								setEmail(e.target.value)
-								if (emailError) setEmailError(false)
-							}}
-						/>
+					<a
+						className='signUpManual'
+						href='#'
+						onClick={() => setOpenForm(true)}
+					>
+						Manual Sign Up <Arrow />
+					</a>
 
-						<div
-							className={`createPasswordWrapper ${
-								passwordError ? 'input-error' : ''
-							}`}
-						>
-							<input
-								className='createPassword'
-								type={showPassword ? 'text' : 'password'}
-								placeholder='Password'
-								value={password}
-								onChange={e => {
-									setPassword(e.target.value)
-									if (passwordError) setPasswordError(false)
-								}}
-							/>
+					{openForm && (
+						<div className='popupOverlay'>
+							<div className='signUpManualForm'>
+								<div className='closeCrosse'>
+									<CloseCrosse onClick={() => setOpenForm(false)} />
+								</div>
 
-							<Eye
-								className='eye'
-								isVisible={isVisible}
-								onClick={togglePasswordVisibility}
-							/>
+								<div className='signUpInputs'>
+									<input
+										className={`signUpInputEmail ${
+											emailError ? 'input-error' : ''
+										}`}
+										type='email'
+										placeholder='Email'
+										value={email}
+										onChange={e => {
+											setEmail(e.target.value)
+											if (emailError) setEmailError(false)
+										}}
+									/>
+
+									<div
+										className={`createPasswordWrapper ${
+											passwordError ? 'input-error' : ''
+										}`}
+									>
+										<input
+											className='createPassword'
+											type={showPassword ? 'text' : 'password'}
+											placeholder='Password'
+											value={password}
+											onChange={e => {
+												setPassword(e.target.value)
+												if (passwordError) setPasswordError(false)
+											}}
+										/>
+
+										<Eye
+											className='eye'
+											isVisible={isVisible}
+											onClick={togglePasswordVisibility}
+										/>
+									</div>
+								</div>
+
+								<button onClick={handleSubmit} className='signUpBtn'>
+									Sign Up
+								</button>
+							</div>
 						</div>
-					</div>
-
-					<button onClick={handleSubmit} className='signUpBtn'>
-						Sing Up
-					</button>
-
-					<div className='signUpTerm'>
-						By signing up, you agree to{' '}
-						<span>Term of Service & Privacy Policy</span>
-					</div>
-					<div className='signUpFooter'>
-						Already have an account?{' '}
-						<a
-							className='signUpLogIn'
-							href='http://swipey.ai/?open_modal=sign-in'
-							target='_blank'
-							rel='noopener noreferrer'
-						>
-							Log in <Arrow />{' '}
-						</a>
-					</div>
+					)}
 				</div>
 			</div>
 		</div>
