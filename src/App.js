@@ -8,7 +8,6 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path='/feed' element={<Home />} />
-					<Route path='/feed/signup' element={<CreateAccount />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

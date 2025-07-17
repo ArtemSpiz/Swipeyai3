@@ -247,6 +247,7 @@
 .answerButton {
 	cursor: pointer;
 	width: 250px;
+	height: 97px;
 	display: flex;
 	height: max-content;
 	padding: 16px 8px;

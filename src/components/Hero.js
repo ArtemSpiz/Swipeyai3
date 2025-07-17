@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import Header from '../layout/header'
 import './Hero.css'
+import CreateAccount from '../pages/CreateAcount/CreateAccount'
 
 import firstBg from '../assets/images/firstBg.png'
 import secondBg from '../assets/images/secondBg.png'
@@ -37,6 +38,7 @@ function Hero() {
 	const [isAnimating, setIsAnimating] = useState(false)
 	const [hoveredIndex, setHoveredIndex] = useState(null)
 	const [isMobile, setIsMobile] = useState(false)
+	const [showCreateAccount, setShowCreateAccount] = useState(false)
 	const sectionsRef = useRef([])
 
 	const isHeaderVisible = currentStep === 0
@@ -145,6 +147,14 @@ function Hero() {
 		}
 	}, [])
 
+	if (showCreateAccount) {
+		return (
+			<div>
+				<CreateAccount />
+			</div>
+		)
+	}
+
 	return (
 		<div className='Hero'>
 			<div
@@ -226,59 +236,70 @@ function Hero() {
 								</div>
 
 								{content.answers && (
-									<div
-										className={`sectionAnswers ${
-											index === 1 ? 'gridThree' : ''
-										}`}
-									>
-										{content.answers.map((answer, i) => {
-											const isLastStep = index === heroContent.length - 1
-											return (
-												<a
-													key={i}
-													href={isLastStep ? '/signup' : '#'}
-													className={`answerButton ${
-														content.answers.length === 3 && i === 2
-															? 'centerThird'
-															: ''
-													}`}
-													style={{
-														...(hoveredIndex === i
-															? {
-																	border: '1px solid #fe6283',
-																	background:
-																		'linear-gradient(82deg, rgba(39, 26, 43, 0.3) 5.24%, rgba(78, 40, 60, 0.3) 98.12%)',
-																	boxShadow: '0px 0px 14px 0px #fe6283',
-															  }
-															: hoveredIndex !== null
-															? { opacity: 0.6 }
-															: {}),
-													}}
-													onMouseEnter={() =>
-														handleAnswerHover(answer.bgVideo, i)
-													}
-													onMouseLeave={handleAnswerLeave}
-													onClick={e => {
-														if (!isLastStep) {
-															e.preventDefault()
-															handleAnswerLeave()
-															scrollToStep(index + 1)
-														}
-													}}
-												>
-													{answer.icon2 && (
-														<div className={'heroIconAnswer'}>
-															{answer.icon2}
-														</div>
-													)}
-													{answer.icon && (
-														<answer.icon className={'heroIconAnswer'} />
-													)}
-													<div className='answerButtonText'>{answer.text}</div>
-												</a>
-											)
-										})}
-									</div>
+									<>
+										{index === heroContent.length - 1 && showCreateAccount ? (
+											<div className='create-account-wrapper'>
+												<CreateAccount />
+											</div>
+										) : (
+											<div
+												className={`sectionAnswers ${
+													index === 1 ? 'gridThree' : ''
+												}`}
+											>
+												{content.answers.map((answer, i) => {
+													return (
+														<a
+															key={i}
+															href='#'
+															className={`answerButton ${
+																content.answers.length === 3 && i === 2
+																	? 'centerThird'
+																	: ''
+															}`}
+															style={{
+																...(hoveredIndex === i
+																	? {
+																			border: '1px solid #fe6283',
+																			background:
+																				'linear-gradient(82deg, rgba(39, 26, 43, 0.3) 5.24%, rgba(78, 40, 60, 0.3) 98.12%)',
+																			boxShadow: '0px 0px 14px 0px #fe6283',
+																	  }
+																	: hoveredIndex !== null
+																	? { opacity: 0.6 }
+																	: {}),
+															}}
+															onMouseEnter={() =>
+																handleAnswerHover(answer.bgVideo, i)
+															}
+															onMouseLeave={handleAnswerLeave}
+															onClick={e => {
+																e.preventDefault()
+																handleAnswerLeave()
+																if (index === heroContent.length - 1) {
+																	setShowCreateAccount(true)
+																} else {
+																	scrollToStep(index + 1)
+																}
+															}}
+														>
+															{answer.icon2 && (
+																<div className='heroIconAnswer'>
+																	{answer.icon2}
+																</div>
+															)}
+															{answer.icon && (
+																<answer.icon className='heroIconAnswer' />
+															)}
+															<div className='answerButtonText'>
+																{answer.text}
+															</div>
+														</a>
+													)
+												})}
+											</div>
+										)}
+									</>
 								)}
 
 								{content.button && (
