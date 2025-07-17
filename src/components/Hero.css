@@ -520,4 +520,8 @@
 		height: 90px;
 		justify-content: center;
 	}
+
+	.signUpSectionBg2 {
+		display: none;
+	}
 }

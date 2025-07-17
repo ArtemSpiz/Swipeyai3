@@ -116,22 +116,22 @@ function Hero() {
 			],
 		},
 		{
-			title: 'Unlock a reel just for your kink—only you?',
-			subtitle: 'Choose Option',
+			title: 'Want a Reel Made Just for Your Kink?',
+			subtitle: 'Your turn-on. Your rules.',
 			answers: [
 				{
-					text: "Yes. That's the kind of dirty I need",
-					icon: thirdIcon1,
+					text: 'Yes. That’s exactly my kind of dirty',
+					icon2: '💦',
 					bgVideo: fourthBg,
 				},
 				{
-					text: 'Maybe… if it really hits my fantasy',
-					icon: thirdIcon2,
+					text: 'Maybe… if it hits the right spot',
+					icon2: '😈',
 					bgVideo: fourthBgHover2,
 				},
 				{
-					text: 'No, I just want to look, not touch',
-					icon: thirdIcon3,
+					text: 'Just looking. For now',
+					icon2: '👀',
 					bgVideo: fourthBgHover3,
 				},
 			],
@@ -266,7 +266,14 @@ function Hero() {
 														}
 													}}
 												>
-													<answer.icon className={'heroIconAnswer'} />
+													{answer.icon2 && (
+														<div className={'heroIconAnswer'}>
+															{answer.icon2}
+														</div>
+													)}
+													{answer.icon && (
+														<answer.icon className={'heroIconAnswer'} />
+													)}
 													<div className='answerButtonText'>{answer.text}</div>
 												</a>
 											)

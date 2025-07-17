@@ -19,7 +19,7 @@
 
 .signUpContent {
 	width: 506px;
-	height: 90%;
+	height: 100%;
 	flex-shrink: 0;
 	position: relative;
 	display: flex;
@@ -27,7 +27,6 @@
 	justify-content: center;
 	align-items: center;
 	gap: 24px;
-	border-radius: 32px;
 	overflow: hidden;
 }
 

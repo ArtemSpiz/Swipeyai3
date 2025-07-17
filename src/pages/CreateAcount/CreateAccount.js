@@ -122,6 +122,12 @@ function CreateAccount() {
 				/>
 			</video>
 			<div className='signUpContent'>
+				<video className='signUpSectionBg2' autoPlay muted loop playsInline>
+					<source
+						src='https://d12kahz818c96x.cloudfront.net/prelander/MontageReelTiktok.webm'
+						type='video/webm'
+					/>
+				</video>
 				<div className='signUpTexts'>
 					<div className='signUpTitles'>
 						<div className='signUpUnderTitle'>
