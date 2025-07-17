@@ -7,6 +7,7 @@ import Arrow from '../../assets/svg/Arrow'
 import ChatIcon from '../../assets/svg/chatIcon'
 import CloseCrosse from '../../assets/svg/closseCross'
 import Coin from '../../assets/images/coin.png'
+import Members from '../../assets/images/members.png'
 
 function CreateAccount() {
 	const [email, setEmail] = useState('')
@@ -232,6 +233,16 @@ function CreateAccount() {
 							</div>
 						</div>
 					)}
+				</div>
+
+				<div className='signUpMembers'>
+					<div className='signUpMembersImg'>
+						<img src={Members} alt='Members' />
+					</div>
+
+					<div className='signUpMembersText'>
+						<span>3M+</span> Members from <span>100+</span> Countries
+					</div>
 				</div>
 			</div>
 		</div>

@@ -373,6 +373,35 @@
 	cursor: pointer;
 }
 
+.signUpMembers {
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+	padding-top: 54px;
+}
+
+.signUpMembersImg {
+	width: 80px;
+	height: 32px;
+}
+
+.signUpMembersText {
+	color: #fff;
+	font-family: Poppins;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	letter-spacing: -0.24px;
+	text-transform: uppercase;
+	width: 120px;
+	text-align: center;
+}
+
+.signUpMembersText span {
+	color: var(--Text_Secondary, #d9d1dc);
+}
+
 @media (max-width: 640px) {
 	.signUpContent {
 		width: 100%;
