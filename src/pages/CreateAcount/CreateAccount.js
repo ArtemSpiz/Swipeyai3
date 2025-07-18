@@ -57,6 +57,19 @@ function CreateAccount() {
 		}
 	}, [])
 
+	useEffect(() => {
+		const params = new URLSearchParams(window.location.search)
+		const authToken = params.get('auth_token')
+		const authType = params.get('auth_type')
+		if (authToken && authType) {
+			const finalUrl = new URL(window.location.origin + '/explorer')
+			finalUrl.searchParams.set('tab', 'spicy')
+			finalUrl.searchParams.set('auth_token', authToken)
+			finalUrl.searchParams.set('auth_type', authType)
+			window.location.replace(finalUrl.toString())
+		}
+	}, [])
+
 	const handleSubmit = () => {
 		const isEmailValid = validateEmail(email)
 		const isPasswordValid = password.length > 0
@@ -81,10 +94,10 @@ function CreateAccount() {
 
 	const submitAccount = async () => {
 		const clickId = getClickIdFromCookies()
-		if (!clickId) {
-			alert('Click ID not found in cookies.')
-			return
-		}
+		// if (!clickId) {
+		// 	alert('Click ID not found in cookies.')
+		// 	return
+		// }
 
 		const utm = JSON.parse(localStorage.getItem('utm_data') || '{}')
 
@@ -106,7 +119,23 @@ function CreateAccount() {
 			const data = await response.json()
 
 			if (data.success && data.loginUrl) {
-				window.location.href = 'https://swipey.ai/explorer?tab=spicy'
+				localStorage.setItem('authToken', data.authToken)
+
+				const url = new URL(data.loginUrl)
+				const authToken = url.searchParams.get('auth_token')
+				const authType = url.searchParams.get('auth_type')
+
+				const finalUrl = new URL('https://swipey.ai/explorer')
+				finalUrl.searchParams.set('tab', 'spicy')
+				finalUrl.searchParams.set('auth_token', authToken)
+				finalUrl.searchParams.set('auth_type', authType)
+
+				Object.entries(utm).forEach(([key, value]) => {
+					if (value) finalUrl.searchParams.set(key, value)
+				})
+
+				console.log(finalUrl.toString())
+				window.location.href = finalUrl.toString() + utm
 			} else {
 				alert(data.message || 'Something went wrong.')
 			}
@@ -187,7 +216,7 @@ function CreateAccount() {
 										models<span> only on Swipey</span>
 									</div>
 									<div className='signUpManualFormSubtitle'>
-										👇<span>{randomNum} members</span> joined today 👇
+										👇<span> {randomNum} members</span> joined today 👇
 									</div>
 								</div>
 
