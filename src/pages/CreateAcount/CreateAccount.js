@@ -37,6 +37,7 @@ function CreateAccount() {
 		const rtkClickID = document.cookie.match(/rtkclickid-store=([^;]+)/)?.[1]
 		const params = new URLSearchParams(window.location.search)
 
+		// Формуємо UTM
 		const utmObj = {
 			rtkcid: rtkClickID,
 			click_id: rtkClickID,
@@ -46,10 +47,13 @@ function CreateAccount() {
 			utm_source: params.get('utm_source'),
 			utm_medium: params.get('utm_medium'),
 			utm_campaign: params.get('utm_campaign'),
-
 			path: '/explorer?tab=spicy',
 		}
 
+		// Зберігаємо utm у localStorage, щоб потім підставити після повернення з Google
+		localStorage.setItem('utm_data', JSON.stringify(utmObj))
+
+		// Формуємо посилання на Google OAuth
 		if (googleBtnRef.current) {
 			googleBtnRef.current.href = `${
 				CONFIG.GOOGLE_AUTH_URL
@@ -61,11 +65,19 @@ function CreateAccount() {
 		const params = new URLSearchParams(window.location.search)
 		const authToken = params.get('auth_token')
 		const authType = params.get('auth_type')
+
 		if (authToken && authType) {
+			const utm = JSON.parse(localStorage.getItem('utm_data') || '{}')
 			const finalUrl = new URL(window.location.origin + '/explorer')
+
 			finalUrl.searchParams.set('tab', 'spicy')
 			finalUrl.searchParams.set('auth_token', authToken)
 			finalUrl.searchParams.set('auth_type', authType)
+
+			Object.entries(utm).forEach(([key, value]) => {
+				if (value) finalUrl.searchParams.set(key, value)
+			})
+
 			window.location.replace(finalUrl.toString())
 		}
 	}, [])
@@ -135,7 +147,7 @@ function CreateAccount() {
 				})
 
 				console.log(finalUrl.toString())
-				window.location.href = finalUrl.toString() + utm
+				window.location.href = finalUrl.toString()
 			} else {
 				alert(data.message || 'Something went wrong.')
 			}
@@ -198,7 +210,10 @@ function CreateAccount() {
 					<a
 						className='signUpManual'
 						href='#'
-						onClick={() => setOpenForm(true)}
+						onClick={e => {
+							e.preventDefault()
+							setOpenForm(true)
+						}}
 					>
 						Manual Sign Up <Arrow />
 					</a>
